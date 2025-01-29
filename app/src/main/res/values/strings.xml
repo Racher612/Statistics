@@ -9,4 +9,7 @@
     <string name="total_time_used">"Total time used: "</string>
     <string name="package_name">"Package Name: "</string>
     <string name="total_number_of_launches">"total number of launches: "</string>
+    <string name="copy">copy</string>
+    <string name="close">close</string>
+    <string name="export_to_json">export to JSON</string>
 </resources>

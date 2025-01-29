@@ -1,18 +1,23 @@
 package com.project.statistics.app.pres
 
-import android.app.usage.UsageStats
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -21,7 +26,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.Dialog
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.project.statistics.R
 import com.project.statistics.common.compose.AppIcon
@@ -50,10 +57,12 @@ fun AppScreen(
     )
 
     Scaffold(
-        topBar = { ContainerBack(navigateBack) }
+        topBar = { ContainerBack(navigateBack) },
     ) {paddingValues ->
         Column(
+            verticalArrangement = Arrangement.SpaceBetween,
             modifier = Modifier
+                .fillMaxSize()
                 .background(Color.Green)
                 .padding(paddingValues)
         ) {
@@ -92,6 +101,13 @@ fun AppScreen(
                     }
                 }
             }
+            PopUpWindow(viewModel = appScreenViewModel)
+            Button(
+                onClick = appScreenViewModel::openWindow,
+                colors = ButtonColors(Color.White, Color.Black, Color.White, Color.Black)
+            ) {
+                Text(stringResource(R.string.export_to_json))
+            }
         }
     }
 }
@@ -116,5 +132,42 @@ fun ContainerBack(
                     navigateBack()
                 }
         )
+    }
+}
+
+@Composable
+fun PopUpWindow(
+    viewModel: AppScreenViewModel
+){
+    val scrollState = rememberScrollState()
+
+    if (viewModel.popUp.value){
+        Dialog(onDismissRequest = viewModel::openWindow) {
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
+                TextField(
+                    enabled = false,
+                    value = viewModel.getJSON(),
+                    modifier = Modifier.verticalScroll(scrollState),
+                    onValueChange = {}
+                )
+                Row {
+                    Button(
+                        onClick = viewModel::copyJSONtoClipboard,
+                        colors = ButtonColors(Color.White, Color.Black, Color.White, Color.Black)
+                    ) {
+                        Text(stringResource(R.string.copy))
+                    }
+                    Button(
+                        onClick = viewModel::openWindow,
+                        colors = ButtonColors(Color.White, Color.Black, Color.White, Color.Black)
+                    ) {
+                        Text(text = stringResource(R.string.close))
+                    }
+                }
+            }
+        }
     }
 }
