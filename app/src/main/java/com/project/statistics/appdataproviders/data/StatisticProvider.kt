@@ -1,13 +1,9 @@
-package com.project.statistics.main.data
+package com.project.statistics.appdataproviders.data
 
-import android.app.AppOpsManager
-import android.app.AppOpsManager.MODE_ALLOWED
-import android.app.AppOpsManager.OPSTR_GET_USAGE_STATS
 import android.app.usage.UsageStats
 import android.app.usage.UsageStatsManager
 import android.content.Context
 import android.icu.util.Calendar
-import android.os.Process
 import dagger.hilt.android.qualifiers.ApplicationContext
 
 
@@ -24,5 +20,9 @@ class StatisticProvider(
             System.currentTimeMillis()
         )
         return queryUsageStats
+    }
+
+    fun getUsageStatsByPackage(packageName: String): UsageStats? {
+        return getUsageStats().find { it.packageName == packageName }
     }
 }

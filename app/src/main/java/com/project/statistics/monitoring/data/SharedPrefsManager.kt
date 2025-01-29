@@ -17,7 +17,7 @@ class SharedPrefsManager(private val context: Context) {
         sharedPrefs.edit().putInt(packageName, launchCount + 1).apply()
     }
 
-    fun getPackageCount(
+    fun getLaunchNumber(
         packageName: String
     ): Int {
         return sharedPrefs.getInt(packageName, 0)

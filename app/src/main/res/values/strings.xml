@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">Statistics</string>
+    <string name="param">param</string>
+    <string name="back">back</string>
+    <string name="not_found">not found</string>
+    <string name="time_used_by_foreground_services">"Time used by foreground services: "</string>
+    <string name="total_fime_in_foreground">"Total fime in foreground: "</string>
+    <string name="last_time_used">"Last time used: "</string>
+    <string name="total_time_used">"Total time used: "</string>
+    <string name="package_name">"Package Name: "</string>
+    <string name="total_number_of_launches">"total number of launches: "</string>
 </resources>
