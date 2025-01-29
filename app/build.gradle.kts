@@ -54,9 +54,17 @@ android {
 dependencies {
     //hilt
     implementation (libs.hilt.android)
+    implementation(libs.androidx.datastore.core.android)
+    implementation(libs.androidx.datastore.preferences.core.jvm)
+    implementation(libs.androidx.work.runtime.ktx)
     kapt (libs.hilt.compiler)
+
+    //navigation
     implementation(libs.androidx.hilt.navigation.compose.v120)
     kapt("com.google.dagger:dagger-compiler:2.51")
+
+    //datastore
+    implementation ("androidx.datastore:datastore-preferences:1.1.2")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

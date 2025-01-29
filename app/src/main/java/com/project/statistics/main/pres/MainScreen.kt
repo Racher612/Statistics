@@ -41,22 +41,18 @@ fun MainScreen(
 fun DisplayAppList(
     usageList : List<UsageStats>
 ){
-    if (usageList.isEmpty()){
-        CircularProgressIndicator()
-    } else {
-        LazyColumn(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.SpaceEvenly,
-            modifier = Modifier
-                .background(Color.White)
-                .padding(4.dp)
-                .fillMaxSize()
-        ) {
-            usageList.forEach { stat ->
-                item {
-                    Log.d("ITEM", stat.toString())
-                    AppCard(usageStat = stat)
-                }
+    LazyColumn(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.SpaceEvenly,
+        modifier = Modifier
+            .background(Color.White)
+            .padding(4.dp)
+            .fillMaxSize()
+    ) {
+        usageList.forEach { stat ->
+            item {
+                Log.d("ITEM", stat.toString())
+                AppCard(usageStat = stat)
             }
         }
     }
