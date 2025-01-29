@@ -16,5 +16,8 @@ fun NavGraph(
         composable(Routes.Main.route) {
             MainScreen()
         }
+        composable(Routes.App.route) {
+
+        }
     }
 }
